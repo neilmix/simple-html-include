@@ -1,19 +1,28 @@
 <html>
     <head>
         <script src="../simple-html-include.js"></script>
+        <script>
+            let scriptExecs = 0;
+            setTimeout(() => {
+                const div = document.createElement("div");
+                div.innerText = `scriptExecs: ${scriptExecs} (should be 3)`;
+                document.body.appendChild(div);
+            }, 1000);
+        </script>
     </head>
+    <body>
         This text appears before the first include.
         <html-include src="include1.html"></html-include>
         This text appears between the first and second include.
         <ul>
             <html-include src="include2.html"></html-include>
         </ul>
-        This text appears after the second include.<br>
+        This text appears after the second include.<br />
         Now we'll include the first file again.
         <html-include src="include1.html"></html-include>
 
-        And finally we'll try an include that doesn't exist, which should result in
-        nothing rendering but a log message in the console.
+        And finally we'll try an include that doesn't exist, which should result in nothing
+        rendering but a log message in the console.
         <html-include src="does-not-exist.html"></html-include>
     </body>
 </html>

@@ -19,7 +19,16 @@
             error(e);
           })
           .then((html) => {
-            this.outerHTML = html;
+            const t = document.createElement("template");
+            t.innerHTML = html;
+            // security restrictions require us to manually re-create each script node
+            let scripts = t.content.querySelectorAll("script");
+            scripts.forEach((script) => {
+              const newScript = document.createElement("script");
+              newScript.text = script.text;
+              script.replaceWith(newScript);
+            });
+            this.replaceWith(t.content);
           });
       }
     }
