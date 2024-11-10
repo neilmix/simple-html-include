@@ -26,6 +26,9 @@
             scripts.forEach((script) => {
               const newScript = document.createElement("script");
               newScript.text = script.text;
+              for (let attr of script.attributes) {
+                newScript.setAttribute(attr.name, script.getAttribute(attr.name));
+              }
               script.replaceWith(newScript);
             });
             this.replaceWith(t.content);
